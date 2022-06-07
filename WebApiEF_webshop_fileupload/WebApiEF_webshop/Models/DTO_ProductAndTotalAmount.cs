@@ -6,15 +6,17 @@ namespace WebApiEF_webshop.Models
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
+        public string ProducDescription { get; set; }
 
         public int ProductPrice { get; set; }
 
         public int TotalAmount { get; set; }
 
-        public DTO_ProductAndTotalAmount(int productId, string productName, int productPrice, int totalAmount)
+        public DTO_ProductAndTotalAmount(int productId, string productName, string productDescription, int productPrice, int totalAmount)
         {
             ProductId = productId;
             ProductName = productName;
+            ProducDescription = productDescription;
             ProductPrice = productPrice;
             TotalAmount = totalAmount;
         }

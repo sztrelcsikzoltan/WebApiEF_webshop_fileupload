@@ -25,7 +25,7 @@ namespace WebApiEF_webshop.Services
         public IEnumerable<DTO_Product> GetProducts()
         {
             return context.Products
-                .Select(p => new DTO_Product(p.Id, p.Name, p.Price, p.Imglink));
+                .Select(p => new DTO_Product(p.Id, p.Name, p.Description, p.Price, p.Imglink));
         }
         
         public Product GetProduct(int productId)
@@ -95,7 +95,7 @@ namespace WebApiEF_webshop.Services
             */
             
             var products = context.OrderProducts.Where(op => op.Order.CustomerId == customerId).
-                Select(op => new DTO_Product(op.ProductId, op.Product.Name, op.Product.Price, op.Product.Imglink));
+                Select(op => new DTO_Product(op.ProductId, op.Product.Name, op.Product.Description, op.Product.Price, op.Product.Imglink));
             
             return products;
         }
@@ -119,7 +119,7 @@ namespace WebApiEF_webshop.Services
             {
                 int totalAmount = context.OrderProducts.Where(op => op.ProductId == products[i].Id && op.Order.CustomerId == customerId).Sum(op => op.Amount);
 
-                dtoList.Add(new DTO_ProductAndTotalAmount(products[i].Id, products[i].Name, products[i].Price, totalAmount));
+                dtoList.Add(new DTO_ProductAndTotalAmount(products[i].Id, products[i].Name, products[i].Description, products[i].Price, totalAmount));
             }
 
             return dtoList;
@@ -131,7 +131,7 @@ namespace WebApiEF_webshop.Services
 
             var products = context.Products.Where(p => p.Id == productId)
                 .Where(p => p.OrderProducts.Any(op => op.Order.CustomerId == customerId)).
-                Select(p => new DTO_ProductAndTotalAmount(p.Id, p.Name, p.Price, context.OrderProducts.Where(op => op.Order.CustomerId == customerId && op.ProductId == productId)
+                Select(p => new DTO_ProductAndTotalAmount(p.Id, p.Name, p.Description, p.Price, context.OrderProducts.Where(op => op.Order.CustomerId == customerId && op.ProductId == productId)
                 .Sum(op => op.Amount)))
                 .FirstOrDefault();
 
@@ -144,7 +144,7 @@ namespace WebApiEF_webshop.Services
             var products = context.Products.Where(p => p.OrderProducts
                .Any(op => op.Order.CustomerId == customerId))
                // .Include(p => p.OrderProducts)
-               .Select(p => new DTO_ProductAndOrderIds(p.Id, p.Name, p.Price, p.OrderProducts.Select(op => op.OrderId)));
+               .Select(p => new DTO_ProductAndOrderIds(p.Id, p.Name,p.Description, p.Price, p.OrderProducts.Select(op => op.OrderId)));
 
             return products;
         }
@@ -273,6 +273,7 @@ namespace WebApiEF_webshop.Services
             //{
             //    Id = product.Id,
             //    Name = product.Name,
+            //    Description = product.Descroiption,
             //    Price = product.Price
 
             //})).ToList();
