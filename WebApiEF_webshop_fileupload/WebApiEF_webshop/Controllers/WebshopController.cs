@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using WebApiEF_webshop.Models;
 using WebApiEF_webshop.Services;
 
@@ -29,6 +30,10 @@ namespace WebApiEF_webshop.Controllers
         public IActionResult GetProducts()
         {
             IEnumerable<DTO_Product> dTO_Products = service.GetProducts();
+            if (dTO_Products.ToList().Count == 0)
+            {
+                return NotFound("No product was found.");
+            }
             return Ok(dTO_Products);
         }
 
