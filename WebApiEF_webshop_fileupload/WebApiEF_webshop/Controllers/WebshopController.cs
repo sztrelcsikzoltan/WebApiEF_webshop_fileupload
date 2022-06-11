@@ -26,174 +26,198 @@ namespace WebApiEF_webshop.Controllers
         }
         */
         
-        public IEnumerable<DTO_Product> GetProducts()
+        public  IActionResult GetProducts()
         {
-            return service.GetProducts();
+            IEnumerable<DTO_Product> dTO_Products = service.GetProducts();
+            return Ok(dTO_Products);
         }
         
         [HttpGet]
         [Route("/GetProduct")]
-        public Product GetProduct(int productId)
+        public IActionResult GetProduct(int productId)
         {
-            return service.GetProduct(productId);
+            Product product = service.GetProduct(productId);
+            return Ok(product);
         }
 
         [HttpGet]
         [Route("/GetProductsByCustomerId")]
-        public IEnumerable<Product> GetProductsByCustomerId([Required] int customerId)
+        public IActionResult GetProductsByCustomerId([Required] int customerId)
         {
-            return service.GetProductsByCustomerId(customerId);
+            IEnumerable<Product> products = service.GetProductsByCustomerId(customerId);
+            return Ok(products);
         }
 
         [HttpGet]
         [Route("/GetOnlyProductsByCustomerId")]
-        public IEnumerable<DTO_Product> GetOnlyProductsByCustomerId([Required] int customerId)
+        public IActionResult GetOnlyProductsByCustomerId([Required] int customerId)
         {
-            return service.GetOnlyProductsByCustomerId(customerId);
+            IEnumerable<DTO_Product> dTO_Products = service.GetOnlyProductsByCustomerId(customerId);
+            return Ok(dTO_Products);
         }
 
         [HttpGet]
         [Route("/GetProductsAndOrdersByCustomerId")]
-        public IEnumerable<Product> GetProductsAndOrdersByCustomerId([Required] int customerId)
+        public IActionResult GetProductsAndOrdersByCustomerId([Required] int customerId)
         {
-            return service.GetProductsAndOrdersByCustomerId(customerId);
+            IEnumerable<Product> products = service.GetProductsAndOrdersByCustomerId(customerId);
+            return Ok(products);
         }
 
         [HttpGet]
         [Route("/GetProductsAndTotalAmountByCustomerId")]
-        public IEnumerable<DTO_ProductAndTotalAmount> GetProductAndTotalAmountByProducIdAndCustomerId(int customerId)
+        public IActionResult GetProductAndTotalAmountByProducIdAndCustomerId(int customerId)
         {
-            return service.GetProductsAndTotalAmountByCustomerId(customerId);
+            IEnumerable<DTO_ProductAndTotalAmount> dTO_ProductAndTotalAmounts = service.GetProductsAndTotalAmountByCustomerId(customerId);
+            return Ok(dTO_ProductAndTotalAmounts);
         }
 
         [HttpGet]
         [Route("/GetProductAndTotalAmountByProductIdAndCustomerId")]
-        public DTO_ProductAndTotalAmount GetProductAndTotalAmountByProducIdAndCustomerId(int productId, int customerId)
+        public IActionResult GetProductAndTotalAmountByProducIdAndCustomerId(int productId, int customerId)
         {
-            return service.GetProductAndTotalAmountByProductIdAndCustomerId(productId, customerId);
+            DTO_ProductAndTotalAmount dTO_ProductAndTotalAmount = service.GetProductAndTotalAmountByProductIdAndCustomerId(productId, customerId);
+            return Ok(dTO_ProductAndTotalAmount);
         }
 
 
         [HttpGet]
         [Route("/GetProductsAndOrderIdsByCustomerId")]
-        public IEnumerable<DTO_ProductAndOrderIds> GetProductsAndOrderIdsByCustomerId([Required] int customerId)
+        public IActionResult GetProductsAndOrderIdsByCustomerId([Required] int customerId)
         {
-            return service.GetProductsAndOrderIdsByCustomerId(customerId);
+            IEnumerable<DTO_ProductAndOrderIds> dTO_ProductAndOrderIds = service.GetProductsAndOrderIdsByCustomerId(customerId);
+            return Ok(dTO_ProductAndOrderIds);
         }
 
         [HttpGet]
         [Route("/GetProductsByCustomerIdFromDate")]
-        public IEnumerable<Product> GetProductsByCustomerIdFromDate(int customerId, DateTime fromDate)
+        public IActionResult GetProductsByCustomerIdFromDate(int customerId, DateTime fromDate)
         {
-            return service.GetProductsByCustomerIdFromDate(customerId, fromDate);
+            IEnumerable<Product> products = service.GetProductsByCustomerIdFromDate(customerId, fromDate);
+            return Ok(products);
         }
 
         
         [HttpGet]
         [Route("/GetProductsByOrderId")]
-        public IEnumerable<Product> GetProductsByOrderId(int orderId)
+        public IActionResult GetProductsByOrderId(int orderId)
         {
-            return service.GetProductsByOrderId(orderId);
+            IEnumerable<Product> products = service.GetProductsByOrderId(orderId);
+            return Ok(products);
         }
 
         [HttpGet]
         [Route("/GetTotalProductsByCustomerIdAndProductId")]
-        public string GetTotalProductsByCustomerIdAndProductId(int customerId, int productId)
+        public IActionResult GetTotalProductsByCustomerIdAndProductId(int customerId, int productId)
         {
-            return service.GetTotalProductsByCustomerIdAndProductId(customerId, productId);
+            string totalProducts = service.GetTotalProductsByCustomerIdAndProductId(customerId, productId);
+            return Ok(totalProducts);
         }
 
 
         [HttpGet]
         [Route("/GetOrdersByCustomerId")]
-        public IEnumerable<Order> GetOrdersByCustomerId(int customerId)
+        public IActionResult GetOrdersByCustomerId(int customerId)
         {
-            return service.GetOrdersByCustomerId(customerId);
+            IEnumerable<Order> orders = service.GetOrdersByCustomerId(customerId);
+            return Ok(orders);
         }
 
         [HttpGet]
         [Route("/GetOrdersByProductName")]
-        public IEnumerable<Order> GetOrdersByProductName(string productName)
+        public IActionResult GetOrdersByProductName(string productName)
         {
-            return service.GetOrdersByProductName(productName);
+            IEnumerable<Order> orders = service.GetOrdersByProductName(productName);
+            return Ok(orders);
         }
 
         [HttpGet]
         [Route(("/GetOrdersByProductNameAndCustomerName"))]
-        public IEnumerable<Order> GetOrdersByProductNameAndCustomerName(string productName, string customerName)
+        public IActionResult GetOrdersByProductNameAndCustomerName(string productName, string customerName)
         {
-            return service.OrdersByProductNameAndCustomerName(productName, customerName);
+            IEnumerable<Order> orders = service.OrdersByProductNameAndCustomerName(productName, customerName);
+            return Ok(orders);
         }
 
         [HttpPost]
         [Route("/AddOrder")]
-        public string AddNewOrder(int customerId, int productId, int amount)
+        public IActionResult AddNewOrder(int customerId, int productId, int amount)
         {
-            return service.AddOrder(customerId, productId, amount);
+            string result = service.AddOrder(customerId, productId, amount);
+            return Ok(result);
         }
 
         [HttpPost]
         [Route("/AddProduct")]
-        public string AddProduct(Product product)
+        public IActionResult AddProduct(Product product)
         {
-            return service.AddProduct(product);
+            string result = service.AddProduct(product);
+            return Ok(result);
         }
 
         [HttpPost]
         [Route("/AddCustomer")]
-        public string AddCustomer(Customer customer)
+        public IActionResult AddCustomer(Customer customer)
         {
-            return service.AddCustomer(customer);
+            string result = service.AddCustomer(customer);
+            return Ok(result);
         }
 
         [HttpPut]
         [Route("/AddProductToOrderByProductIdAndOrderId")]
-        public string AddProductToOrderByProductIdAndOrderId(int orderid, int productId, int amount)
+        public IActionResult AddProductToOrderByProductIdAndOrderId(int orderid, int productId, int amount)
         {
-            return service.AddProductToOrderByOrderIdAndProductId(orderid, productId, amount);
+            string result = service.AddProductToOrderByOrderIdAndProductId(orderid, productId, amount);
+            return Ok(result);
         }
 
         [HttpPut]
         [Route("/CloseOrder")]
-        public string CloseOrder(int orderId)
+        public IActionResult CloseOrder(int orderId)
         {
-            return service.CloseOrder(orderId);
+            string result = service.CloseOrder(orderId);
+            return Ok(result);
         }
 
         [HttpPut]
         [Route("/UpdateProduct")]
-        public string UpdateProduct(Product product)
+        public IActionResult UpdateProduct(Product product)
         {
-            return service.UpdateProduct(product);
+            string result = service.UpdateProduct(product);
+            return Ok(result);
         }
 
 
         [HttpDelete]
         [Route("/DeleteCustomer")]
-        public string DeleteCustomer(int customerId)
+        public IActionResult DeleteCustomer(int customerId)
         {
-            return service.DeleteCustomer(customerId);
+            string result = service.DeleteCustomer(customerId);
+            return Ok(result);
         }
         
         [HttpDelete]
         [Route("/DeleteProduct")]
-        public string DeleteProduct(int productId)
+        public IActionResult DeleteProduct(int productId)
         {
-            return service.DeleteProduct(productId);
+            string result = service.DeleteProduct(productId);
+            return Ok(result);
         }
         
         [HttpDelete]
         [Route("/DeleteProductFromOrderByOrderIdAndProductId")]
-        public string DeleteProductFromOrderByOrderIdAndProductId(int orderId, int productId)
+        public IActionResult DeleteProductFromOrderByOrderIdAndProductId(int orderId, int productId)
         {
-            return service.DeleteProductFromOrderByOrderIdAndProductId(orderId, productId);
+            string result = service.DeleteProductFromOrderByOrderIdAndProductId(orderId, productId);
+            return Ok(result);
         }
         
         [HttpDelete]
         [Route("/DeleteOrder")]
-        public string DeleteOrder(int orderId)
+        public IActionResult DeleteOrder(int orderId)
         {
-            return service.DeleteOrder(orderId);
+            string result = service.DeleteOrder(orderId);
+            return Ok(result);
         }
     }
 }
