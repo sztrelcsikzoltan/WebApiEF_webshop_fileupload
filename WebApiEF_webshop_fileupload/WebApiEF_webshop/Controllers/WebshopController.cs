@@ -44,6 +44,10 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 Product product = service.GetProduct(productId);
+                if (product == null)
+                {
+                    return NotFound($"No product was found with id {productId}");
+                }
                 return Ok(product);
             }
             catch (System.Exception ex)
