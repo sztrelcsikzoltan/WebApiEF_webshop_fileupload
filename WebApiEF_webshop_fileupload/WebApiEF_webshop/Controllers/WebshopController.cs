@@ -101,6 +101,10 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 IEnumerable<Product> products = service.GetProductsAndOrdersByCustomerId(customerId);
+                if (products.ToList().Count == 0)
+                {
+                    return NotFound($"No products/orders were found for the customer id {customerId}");
+                }
                 return Ok(products);
             }
             catch (System.Exception ex)
