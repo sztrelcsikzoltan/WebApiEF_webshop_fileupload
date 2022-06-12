@@ -139,6 +139,10 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 DTO_ProductAndTotalAmount dTO_ProductAndTotalAmount = service.GetProductAndTotalAmountByProductIdAndCustomerId(productId, customerId);
+                if (dTO_ProductAndTotalAmount == null)
+                {
+                    return NotFound($"No product was found for the productId {productId} and the customer id {customerId}");
+                }
                 return Ok(dTO_ProductAndTotalAmount);
             }
             catch (System.Exception ex)
