@@ -82,6 +82,10 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 IEnumerable<DTO_Product> dTO_Products = service.GetOnlyProductsByCustomerId(customerId);
+                if (dTO_Products.ToList().Count == 0)
+                {
+                    return NotFound($"No products were found for the customer id {customerId}");
+                }
                 return Ok(dTO_Products);
             }
             catch (System.Exception ex)
