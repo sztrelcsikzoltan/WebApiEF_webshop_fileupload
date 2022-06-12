@@ -120,6 +120,10 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 IEnumerable<DTO_ProductAndTotalAmount> dTO_ProductAndTotalAmounts = service.GetProductsAndTotalAmountByCustomerId(customerId);
+                if (dTO_ProductAndTotalAmounts.ToList().Count == 0)
+                {
+                    return NotFound($"No products were found for the customer id {customerId}");
+                }
                 return Ok(dTO_ProductAndTotalAmounts);
             }
             catch (System.Exception ex)
