@@ -159,7 +159,10 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 IEnumerable<DTO_ProductAndOrderIds> dTO_ProductAndOrderIds = service.GetProductsAndOrderIdsByCustomerId(customerId);
-                
+                if (dTO_ProductAndOrderIds.ToList().Count == 0)
+                {
+                    return NotFound($"No products/orders were found for the customer id {customerId}");
+                }
                 return Ok(dTO_ProductAndOrderIds);
             }
             catch (System.Exception ex)
