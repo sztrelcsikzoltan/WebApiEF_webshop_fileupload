@@ -198,6 +198,10 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 IEnumerable<Product> products = service.GetProductsByOrderId(orderId);
+                if (products.ToList().Count == 0)
+                {
+                    return NotFound($"No products were found for the order id {orderId}");
+                }
                 return Ok(products);
             }
             catch (System.Exception ex)
