@@ -256,6 +256,10 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 IEnumerable<Order> orders = service.GetOrdersByProductName(productName);
+                if (orders.ToList().Count == 0)
+                {
+                    return NotFound($"No order was found for the product name {productName}");
+                }
                 return Ok(orders);
             }
             catch (System.Exception ex)
