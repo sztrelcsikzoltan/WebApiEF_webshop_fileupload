@@ -217,6 +217,10 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 string totalProducts = service.GetTotalProductsByCustomerIdAndProductId(customerId, productId);
+                if (totalProducts == "0")
+                {
+                    return NotFound($"No product was found for the customer id {customerId} and for the product id {productId}");
+                }
                 return Ok(totalProducts);
             }
             catch (System.Exception ex)
