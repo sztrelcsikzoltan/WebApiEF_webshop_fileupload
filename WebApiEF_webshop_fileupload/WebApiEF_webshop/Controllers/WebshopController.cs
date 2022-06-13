@@ -178,6 +178,10 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 IEnumerable<Product> products = service.GetProductsByCustomerIdFromDate(customerId, fromDate);
+                if (products.ToList().Count == 0)
+                {
+                    return NotFound($"No products were found for the customer id {customerId} from date {fromDate}");
+                }
                 return Ok(products);
             }
             catch (System.Exception ex)
