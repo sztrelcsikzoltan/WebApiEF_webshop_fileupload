@@ -313,6 +313,10 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 string result = service.AddProduct(product);
+                if (result.Contains("already exists"))
+                {
+                    return BadRequest(result);
+                }
                 return Ok(result);
             }
             catch (System.Exception ex)
