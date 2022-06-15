@@ -260,6 +260,12 @@ namespace WebApiEF_webshop.Services
 
         public string AddProduct(DTO_ProductNoId dTO_ProductNoId)
         {
+            bool productNameExists = context.Products.Any(p => p.Name == dTO_ProductNoId.Name);
+            if (productNameExists)
+            {
+                return $"The product with the name'{dTO_ProductNoId.Name}' already exists!";
+            }
+
             Product product = new Product()
             {
                 Name = dTO_ProductNoId.Name,
@@ -267,7 +273,7 @@ namespace WebApiEF_webshop.Services
                 Price = dTO_ProductNoId.Price,
                 Imglink = dTO_ProductNoId.Imglink
             };
-            
+
             context.Products.Add(product);
             context.SaveChanges();
             return $"The product '{product.Name}' was added.";
