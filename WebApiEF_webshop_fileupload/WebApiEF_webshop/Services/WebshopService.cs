@@ -258,10 +258,15 @@ namespace WebApiEF_webshop.Services
             return $"Order with Id {order.Id} was added.";
         }
 
-        public string AddProduct(Product product)
+        public string AddProduct(DTO_ProductNoId dTO_ProductNoId)
         {
-            bool productExists = context.Products.Any(p => p.Id == product.Id);
-            if (productExists) { return $"Product with Id {product.Id} already exists!"; }
+            Product product = new Product()
+            {
+                Name = dTO_ProductNoId.Name,
+                Description = dTO_ProductNoId.Description,
+                Price = dTO_ProductNoId.Price,
+                Imglink = dTO_ProductNoId.Imglink
+            };
             
             context.Products.Add(product);
             context.SaveChanges();

@@ -308,15 +308,11 @@ namespace WebApiEF_webshop.Controllers
 
         [HttpPost]
         [Route("/AddProduct")]
-        public IActionResult AddProduct(Product product)
+        public IActionResult AddProduct(DTO_ProductNoId dTO_ProductNoId)
         {
             try
             {
-                string result = service.AddProduct(product);
-                if (result.Contains("already exists"))
-                {
-                    return BadRequest(result);
-                }
+                string result = service.AddProduct(dTO_ProductNoId);
                 return Ok(result);
             }
             catch (System.Exception ex)
