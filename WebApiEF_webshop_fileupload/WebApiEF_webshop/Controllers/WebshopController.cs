@@ -351,6 +351,10 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 string result = service.AddProductToOrderByOrderIdAndProductId(orderid, productId, amount);
+                if (result.Contains("We") == false)
+                {
+                    return BadRequest(result);
+                }
                 return Ok(result);
             }
             catch (System.Exception ex)

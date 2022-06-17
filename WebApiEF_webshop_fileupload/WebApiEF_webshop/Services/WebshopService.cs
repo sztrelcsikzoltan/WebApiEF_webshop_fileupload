@@ -336,7 +336,7 @@ namespace WebApiEF_webshop.Services
                 orderProduct.Amount += amount;
                 context.OrderProducts.Update(orderProduct);
                 context.SaveChanges();
-                return ($" We updated the product with Id {productId} in the order with Id {orderId}.");
+                return ($"We updated the product with Id {productId} in the order with Id {orderId}.");
             }
             else // add orderProduct if does not exist
             {
@@ -348,7 +348,7 @@ namespace WebApiEF_webshop.Services
                 };
                 context.OrderProducts.Add(orderProduct);
                 context.SaveChanges();
-                return ($" We added the product with Id {productId} to the order with Id {orderId}.");
+                return ($"We added the product with Id {productId} to the order with Id {orderId}.");
             }
         }
 
