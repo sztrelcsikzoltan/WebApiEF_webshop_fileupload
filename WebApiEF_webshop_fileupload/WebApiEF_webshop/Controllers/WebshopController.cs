@@ -327,11 +327,15 @@ namespace WebApiEF_webshop.Controllers
 
         [HttpPost]
         [Route("/AddCustomer")]
-        public IActionResult AddCustomer(Customer customer)
+        public IActionResult AddCustomer(DTO_CustomerNoId dTO_CustomerNoId)
         {
             try
             {
-                string result = service.AddCustomer(customer);
+                string result = service.AddCustomer(dTO_CustomerNoId);
+                if (result.Contains("already exists"))
+                {
+                    return BadRequest(result);
+                }
                 return Ok(result);
             }
             catch (System.Exception ex)

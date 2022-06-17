@@ -263,7 +263,7 @@ namespace WebApiEF_webshop.Services
             bool productNameExists = context.Products.Any(p => p.Name == dTO_ProductNoId.Name);
             if (productNameExists)
             {
-                return $"The product with the name'{dTO_ProductNoId.Name}' already exists!";
+                return $"The product with the name '{dTO_ProductNoId.Name}' already exists!";
             }
 
             Product product = new Product()
@@ -296,8 +296,20 @@ namespace WebApiEF_webshop.Services
         }
         */
 
-        public string AddCustomer(Customer customer)
+        public string AddCustomer(DTO_CustomerNoId dTO_CustomerNoId)
         {
+            bool emailExists = context.Customers.Any(c => c.Email == dTO_CustomerNoId.Email);
+            if (emailExists)
+            {
+                return $"The customer with the e-mail '{dTO_CustomerNoId.Email}' already exists!";
+            }
+
+            Customer customer = new Customer()
+            {
+                Name = dTO_CustomerNoId.Name,
+                Email = dTO_CustomerNoId.Email
+            };
+
             context.Customers.Add(customer);
             context.SaveChanges();
             return $"Customer '{customer.Name}' was added.";
