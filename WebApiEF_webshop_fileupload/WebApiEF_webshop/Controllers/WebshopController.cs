@@ -409,6 +409,10 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 string result = service.DeleteCustomer(customerId);
+                if (result.Contains("was deleted") == false)
+                {
+                    return BadRequest(result);
+                }
                 return Ok(result);
             }
             catch (System.Exception ex)
