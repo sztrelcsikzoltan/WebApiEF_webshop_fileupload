@@ -380,22 +380,7 @@ namespace WebApiEF_webshop.Services
             if (customer == null) { return $"Customer with Id {customerId} does not exist!"; }
             if (context.Orders.Any(o => o.CustomerId == customerId)) { return $"Customer with id {customerId} has orders, so this customer cannot be deleted. Fist delete the corresponding orders."; }
             context.Customers.Remove(customer);
-            try
-            {
-                context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                if (ex.InnerException != null)
-                {
-                    return $"The following error occurred: {ex.InnerException}";
-                }
-                else
-                {
-                    return $"The following error occurred: {ex.Message}";
-                }
-            }
-
+            context.SaveChanges();
             return $"Customer with Id {customerId} was deleted.";
         }
 
@@ -405,22 +390,7 @@ namespace WebApiEF_webshop.Services
             if (product == null) { return $"Product with Id {productId} does not exist!"; }
             if (context.OrderProducts.Any(op => op.Product.Id == productId)) { return $"Product with id {productId} is contained in one or more orders, so this product cannot be deleted. Fist delete the corresponding orders."; }
             context.Products.Remove(product);
-            try
-            {
-                context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                if (ex.InnerException != null)
-                {
-                    return $"The following error occurred: {ex.InnerException}";
-                }
-                else
-                {
-                    return $"The following error occurred: {ex.Message}";
-                }
-            }
-
+            context.SaveChanges();
             return $"Product with Id {productId} was deleted.";
         }
 
@@ -461,30 +431,15 @@ namespace WebApiEF_webshop.Services
             IEnumerable<OrderProduct> orderProductList = context.OrderProducts.Where(op => op.OrderId == orderId);
 
             string message = "";
-            try
+            foreach (OrderProduct orderproduct in orderProductList)
             {
-                foreach (OrderProduct orderproduct in orderProductList)
-                {
-                    context.OrderProducts.Remove(orderproduct);
-                    context.SaveChanges();
-                    message += $"Product with Id {orderproduct.ProductId}' was removed from order.\n";
-                }
-                context.Orders.Remove(order);
+                context.OrderProducts.Remove(orderproduct);
                 context.SaveChanges();
-                return message += $"Order with Id {order.Id}' was removed.";
-
+                message += $"Product with Id {orderproduct.ProductId}' was removed from order.\n";
             }
-            catch (Exception ex)
-            {
-                if (ex.InnerException != null)
-                {
-                    return $"The following error occurred: {ex.InnerException}";
-                }
-                else
-                {
-                    return $"The following error occurred: {ex.Message}";
-                }
-            }
+            context.Orders.Remove(order);
+            context.SaveChanges();
+            return message += $"Order with Id {order.Id}' was removed.";
         }
 
     }
