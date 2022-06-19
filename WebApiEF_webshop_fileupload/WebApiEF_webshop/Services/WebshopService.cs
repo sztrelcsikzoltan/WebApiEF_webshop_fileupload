@@ -414,7 +414,7 @@ namespace WebApiEF_webshop.Services
                 {
                     context.Orders.Remove(order);
                     context.SaveChanges();
-                    message += $"Emptiy order with Id {orderId} was removed.";
+                    message += $"Empty order with Id {orderId} was removed.";
                 }
                 return message;
             }
