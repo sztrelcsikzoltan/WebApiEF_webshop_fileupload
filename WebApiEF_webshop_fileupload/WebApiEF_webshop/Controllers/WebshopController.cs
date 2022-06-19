@@ -428,6 +428,10 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 string result = service.DeleteProduct(productId);
+                if (result.Contains("was deleted") == false)
+                {
+                    return BadRequest(result);
+                }
                 return Ok(result);
             }
             catch (System.Exception ex)
