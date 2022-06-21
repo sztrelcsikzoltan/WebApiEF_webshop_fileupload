@@ -466,6 +466,10 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 string result = service.DeleteOrder(orderId);
+                if (result.Contains("does not exist"))
+                {
+                    return BadRequest(result);
+                }
                 return Ok(result);
             }
             catch (System.Exception ex)
