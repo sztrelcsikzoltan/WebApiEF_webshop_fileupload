@@ -30,11 +30,18 @@ namespace WebApiEF_webshop.Controllers
         public IActionResult GetProducts()
         {
             IEnumerable<DTO_Product> dTO_Products = service.GetProducts();
-            if (dTO_Products.ToList().Count == 0)
+            try
             {
-                return NotFound("No product was found.");
+                if (dTO_Products.ToList().Count == 0)
+                {
+                    return NotFound("No product was found.");
+                }
+                return Ok(dTO_Products);
             }
-            return Ok(dTO_Products);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet]
