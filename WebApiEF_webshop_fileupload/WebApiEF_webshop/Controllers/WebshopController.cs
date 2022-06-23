@@ -141,7 +141,7 @@ namespace WebApiEF_webshop.Controllers
 
         [HttpGet]
         [Route("/GetProductAndTotalAmountByProductIdAndCustomerId")]
-        public IActionResult GetProductAndTotalAmountByProductIdAndCustomerId(int productId, int customerId)
+        public IActionResult GetProductAndTotalAmountByProductIdAndCustomerId([Required] int productId, [Required] int customerId)
         {
             try
             {
