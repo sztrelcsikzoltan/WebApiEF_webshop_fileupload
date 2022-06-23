@@ -46,7 +46,7 @@ namespace WebApiEF_webshop.Controllers
 
         [HttpGet]
         [Route("/GetProduct")]
-        public IActionResult GetProduct(int productId)
+        public IActionResult GetProduct([Required] int productId)
         {
             try
             {
