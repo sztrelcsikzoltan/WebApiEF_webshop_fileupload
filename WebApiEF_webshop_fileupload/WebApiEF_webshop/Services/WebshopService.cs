@@ -155,7 +155,7 @@ namespace WebApiEF_webshop.Services
             // Products → OrderProducts → Order.customerId + Order.CreatedOn (SINGLE results)
 
             var products = context.Products.Where(p => p.OrderProducts
-                .Any(op => op.Order.CustomerId == customerId && op.Order.CreatedOn > fromDate));
+                .Any(op => op.Order.CustomerId == customerId && op.Order.CreatedOn >= fromDate));
 
             // Orders: order.customerId + Order.CreatedOn → OrderProducts → Products
             /*
