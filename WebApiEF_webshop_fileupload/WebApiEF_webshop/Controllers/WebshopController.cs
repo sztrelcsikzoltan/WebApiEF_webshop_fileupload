@@ -180,7 +180,7 @@ namespace WebApiEF_webshop.Controllers
 
         [HttpGet]
         [Route("/GetProductsByCustomerIdFromDate")]
-        public IActionResult GetProductsByCustomerIdFromDate(int customerId, DateTime fromDate)
+        public IActionResult GetProductsByCustomerIdFromDate([Required] int customerId, DateTime fromDate)
         {
             try
             {
