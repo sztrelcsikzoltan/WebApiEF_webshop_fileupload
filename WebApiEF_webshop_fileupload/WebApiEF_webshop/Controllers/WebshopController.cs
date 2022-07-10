@@ -296,12 +296,12 @@ namespace WebApiEF_webshop.Controllers
 
         [HttpPost]
         [Route("/AddOrder")]
-        public IActionResult AddOrder(int customerId, int productId, int amount)
+        public IActionResult AddOrder([Required] int customerId, [Required] int productId, [Required] int amount)
         {
             try
             {
                 string result = service.AddOrder(customerId, productId, amount);
-                if (result.Contains("does no exist"))
+                if (result.Contains("does no exist") || result.Contains("greater than zero"))
                 {
                     return BadRequest(result);
                 }

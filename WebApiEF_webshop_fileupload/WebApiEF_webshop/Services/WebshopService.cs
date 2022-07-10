@@ -234,9 +234,10 @@ namespace WebApiEF_webshop.Services
         public string AddOrder(int customerId, int productId, int amount) // a .PaidOn mezőt ki kell hagyni(null lesz), addig adható hozzá még termék, amíg nem NULL, és a PaidOn beállítása után már nem adható hozzá termék!
         {
             bool customerExists = context.Customers.Any(c => c.Id == customerId);
-            if (customerExists == false) { return $"Customer with Id {customerId} does not exist!"; }
+            if (customerExists == false) { return $"Customer with Id '{customerId}' does not exist!"; }
             bool productExists = context.Products.Any(p => p.Id == productId);
-            if (productExists == false) { return $"Product with Id {productId} does not exist!"; }
+            if (productExists == false) { return $"Product with Id '{productId}' does not exist!"; }
+            if (amount < 1) { return $"Amount must be greater than zero!"; }
 
             Order order = new Order
             {
