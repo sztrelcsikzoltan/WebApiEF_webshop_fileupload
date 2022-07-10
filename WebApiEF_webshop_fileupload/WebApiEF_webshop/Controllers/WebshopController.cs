@@ -239,7 +239,7 @@ namespace WebApiEF_webshop.Controllers
 
         [HttpGet]
         [Route("/GetOrdersByCustomerId")]
-        public IActionResult GetOrdersByCustomerId(int customerId)
+        public IActionResult GetOrdersByCustomerId([Required] int customerId)
         {
             try
             {
