@@ -258,14 +258,14 @@ namespace WebApiEF_webshop.Controllers
 
         [HttpGet]
         [Route("/GetOrdersByProductName")]
-        public IActionResult GetOrdersByProductName(string productName)
+        public IActionResult GetOrdersByProductName([Required] string productName)
         {
             try
             {
                 IEnumerable<Order> orders = service.GetOrdersByProductName(productName);
                 if (orders.ToList().Count == 0)
                 {
-                    return NotFound($"No order was found for the product name {productName}");
+                    return NotFound($"No order was found for the product name '{productName}'");
                 }
                 return Ok(orders);
             }
