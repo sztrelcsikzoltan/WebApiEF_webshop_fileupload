@@ -266,6 +266,10 @@ namespace WebApiEF_webshop.Services
             {
                 return $"The product with the name '{dTO_ProductNoId.Name}' already exists!";
             }
+            if (dTO_ProductNoId.Name.Length < 4) { return $"Please enter a valid Name! (Minimum 4 characters)"; }
+            if (dTO_ProductNoId.Description.Length < 10) { return $"Please enter a valid Description! (Minimum 10 characters)"; }
+            if (dTO_ProductNoId.Price < 1) { return $"Please enter a valid Price! (Greater than zero)" ; }
+            if (dTO_ProductNoId.Imglink.Length < 4) { return $"Please enter a valid Imglink! (Minimum 4 characters)"; }
 
             Product product = new Product()
             {
