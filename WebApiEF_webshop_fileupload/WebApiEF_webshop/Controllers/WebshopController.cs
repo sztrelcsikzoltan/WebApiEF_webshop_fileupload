@@ -320,7 +320,7 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 string result = service.AddProduct(dTO_ProductNoId);
-                if (result.Contains("already exists"))
+                if (result.Contains("already exists") || result.Contains("Please enter"))
                 {
                     return BadRequest(result);
                 }
