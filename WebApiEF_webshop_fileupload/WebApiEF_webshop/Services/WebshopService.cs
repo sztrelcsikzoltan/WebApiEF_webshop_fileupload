@@ -303,6 +303,9 @@ namespace WebApiEF_webshop.Services
 
         public string AddCustomer(DTO_CustomerNoId dTO_CustomerNoId)
         {
+            if (dTO_CustomerNoId.Email.Length < 4 || dTO_CustomerNoId.Email.Contains("@") == false || dTO_CustomerNoId.Email.Contains(".") == false) { return $"Please enter a valid e-mail address!"; }
+            if (dTO_CustomerNoId.Name.Length < 4) { return $"Please enter a valid name! (Minimum 4 characters"; }
+
             bool emailExists = context.Customers.Any(c => c.Email == dTO_CustomerNoId.Email);
             if (emailExists)
             {
