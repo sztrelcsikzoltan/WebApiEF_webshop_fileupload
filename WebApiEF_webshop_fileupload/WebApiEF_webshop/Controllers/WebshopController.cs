@@ -353,11 +353,11 @@ namespace WebApiEF_webshop.Controllers
 
         [HttpPut]
         [Route("/AddProductToOrderByProductIdAndOrderId")]
-        public IActionResult AddProductToOrderByProductIdAndOrderId(int orderid, int productId, int amount)
+        public IActionResult AddProductToOrderByProductIdAndOrderId(int productId, int orderid, int amount)
         {
             try
             {
-                string result = service.AddProductToOrderByOrderIdAndProductId(orderid, productId, amount);
+                string result = service.AddProductToOrderByProductIdAndOrderId(productId, orderid, amount);
                 if (result.Contains("We") == false)
                 {
                     return BadRequest(result);

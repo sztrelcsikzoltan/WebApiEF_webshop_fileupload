@@ -324,7 +324,7 @@ namespace WebApiEF_webshop.Services
         }
 
 
-        public string AddProductToOrderByOrderIdAndProductId(int orderId, int productId, int amount)
+        public string AddProductToOrderByProductIdAndOrderId(int productId, int orderId, int amount)
         {
 
             Product product = context.Products.Find(productId);
