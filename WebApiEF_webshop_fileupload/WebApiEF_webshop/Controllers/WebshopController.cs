@@ -372,7 +372,7 @@ namespace WebApiEF_webshop.Controllers
 
         [HttpPut]
         [Route("/CloseOrder")]
-        public IActionResult CloseOrder(int orderId)
+        public IActionResult CloseOrder([Required] int orderId)
         {
             try
             {
