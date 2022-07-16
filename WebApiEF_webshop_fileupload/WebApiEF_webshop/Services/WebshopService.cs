@@ -333,7 +333,7 @@ namespace WebApiEF_webshop.Services
             if (order == null) { return $"Order with Id {orderId} does not exist!"; }
 
 
-            if (amount < 1) { return $"Amount must be at least 1!"; }
+            if (amount < 1) { return $"Amount must be greater than zero!"; }
             else if (order.PaidOn != null) { return $"Order with Id {orderId} is closed, no more product can be addded!"; }
 
 

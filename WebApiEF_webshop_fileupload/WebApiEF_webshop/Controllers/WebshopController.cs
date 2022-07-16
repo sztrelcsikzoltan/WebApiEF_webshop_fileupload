@@ -353,7 +353,7 @@ namespace WebApiEF_webshop.Controllers
 
         [HttpPut]
         [Route("/AddProductToOrderByProductIdAndOrderId")]
-        public IActionResult AddProductToOrderByProductIdAndOrderId(int productId, int orderid, int amount)
+        public IActionResult AddProductToOrderByProductIdAndOrderId([Required] int productId, [Required] int orderid, [Required] int amount)
         {
             try
             {
