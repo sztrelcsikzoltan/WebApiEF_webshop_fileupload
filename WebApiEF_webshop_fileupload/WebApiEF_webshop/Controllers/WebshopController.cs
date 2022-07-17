@@ -396,7 +396,7 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 string result = service.UpdateProduct(product);
-                if (result.Contains("does not exist"))
+                if (result.Contains("does not exist") || result.Contains("Please enter"))
                 {
                     return BadRequest(result);
                 }
