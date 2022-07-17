@@ -376,7 +376,11 @@ namespace WebApiEF_webshop.Services
         {
             bool productExists = context.Products.Any(p => p.Id == product.Id);
             if (productExists == false) { return $"Product with Id {product.Id} does not exist!"; }
-            
+            if (product.Name.Length < 4) { return $"Please enter a valid Name! (Minimum 4 characters)"; }
+            if (product.Description.Length < 10) { return $"Please enter a valid Description! (Minimum 10 characters)"; }
+            if (product.Price < 1) { return $"Please enter a valid Price! (Greater than zero)"; }
+            if (product.Imglink.Length < 4) { return $"Please enter a valid Imglink! (Minimum 4 characters)"; }
+
             context.Products.Update(product);
             context.SaveChanges();
             return $"The product '{product.Name}' was updated.";
