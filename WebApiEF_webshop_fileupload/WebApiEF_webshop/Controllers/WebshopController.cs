@@ -430,7 +430,7 @@ namespace WebApiEF_webshop.Controllers
 
         [HttpDelete]
         [Route("/DeleteProduct")]
-        public IActionResult DeleteProduct(int productId)
+        public IActionResult DeleteProduct([Required] int productId)
         {
             try
             {
