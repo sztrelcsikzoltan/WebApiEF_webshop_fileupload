@@ -421,20 +421,12 @@ namespace WebApiEF_webshop.Services
             {
                 context.OrderProducts.Remove(orderProduct);
                 context.SaveChanges();
-                message = $"Product with Id {productId} was removed from the order.\n";
-
-                bool orderProductsExists = context.OrderProducts.Any(op => op .OrderId == orderId && op.ProductId == productId);
-                if (orderProductsExists == false)
-                {
-                    context.Orders.Remove(order);
-                    context.SaveChanges();
-                    message += $"Empty order with Id {orderId} was removed.";
-                }
+                message = $"Product with Id {productId} was removed from the order.";
                 return message;
             }
             else
             {
-                return $"No product was found in the order with id {orderId}!";
+                return $"The product does not exist in the order with id {orderId}!";
             }
         }
 
