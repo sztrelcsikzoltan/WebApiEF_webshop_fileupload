@@ -411,6 +411,8 @@ namespace WebApiEF_webshop.Services
         {
             Order order = context.Orders.Find(orderId);
             if (order == null) { return $"Order with Id {orderId} does not exist!"; }
+            Product product = context.Products.Find(productId);
+            if (product == null) { return $"Product with Id {productId} does not exist!"; }
 
             OrderProduct orderProduct = context.OrderProducts.Where(op => op.OrderId == orderId && op.ProductId == productId).FirstOrDefault();
 
