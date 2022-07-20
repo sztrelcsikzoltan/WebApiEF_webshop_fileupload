@@ -339,7 +339,7 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 string result = service.AddCustomer(dTO_CustomerNoId);
-                if (result.Contains("already exists") || result.Contains("Please enter"))
+                if (result.Contains("was added") == false)
                 {
                     return BadRequest(result);
                 }
@@ -396,7 +396,7 @@ namespace WebApiEF_webshop.Controllers
             try
             {
                 string result = service.UpdateProduct(product);
-                if (result.Contains("does not exist") || result.Contains("Please enter"))
+                if (result.Contains("was updated") == false)
                 {
                     return BadRequest(result);
                 }
